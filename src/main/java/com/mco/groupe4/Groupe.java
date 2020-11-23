@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mco.groupe4;
 
 import java.util.ArrayList;
@@ -10,11 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- *
- * @author axel
- */
-class Groupe {
+// Similaire à Obsersvable
+final class Groupe {
     
     private Set<Membre> membres = new TreeSet<Membre>();
     private Membre historique, analyse;
@@ -30,10 +22,9 @@ class Groupe {
     public void ajouterMembre(Membre membre) {
         membres.add(membre);
         
-        if (membre != historique) {
-            for (String message: ((Historique) historique).getMessages()) {
-                membre.traiterMessage(message);
-            }
+        if (membre != historique && membre != analyse) {
+            Historique h = (Historique) historique;
+            h.getMessages().forEach(membre::traiterMessage);
         }
     }
     
